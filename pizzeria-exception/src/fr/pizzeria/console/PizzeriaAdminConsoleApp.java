@@ -38,25 +38,45 @@ public class PizzeriaAdminConsoleApp {
 		PizzaMemDao daoPizza = new PizzaMemDao();
 		Scanner scan = new Scanner(System.in);
 		int choixUser = -1;
+		boolean ok = false;
 		MenuServiceFactory factory = new MenuServiceFactory();
 		
 		//Premier affichage console
 		app.afficherMenu();
-		choixUser = scan.nextInt();
+		
+		while(!ok) {
+			try {
+				choixUser = scan.nextInt();
+				ok = true;
+			}
+			catch (Exception e) {
+				System.out.println("Attention, vous devez saisir un nombre uniquement");
+				scan.next();
+			}
+		}
+		
 		
 		// Boucle de choix utilisateurs
 		do {
+			ok = false;
 			if(choixUser<1 || choixUser>4 && choixUser !=99) {
 				System.out.println("Erreur de saisie");
 				app.afficherMenu();
 				choixUser=scan.nextInt();
 			}
 			else {
-				try {
-					factory.creerMenuService(daoPizza, scan, choixUser).executeUC();
-				} catch (PizzaException e) {
-					System.out.println(e.getMessage());
+				
+				while(!ok) {
+					System.out.println("While");
+					try {
+						factory.creerMenuService(daoPizza, scan, choixUser).executeUC();
+						ok=true;
+					} catch (PizzaException e) {
+						System.out.println(e.getMessage());
+						System.out.println();
+					}
 				}
+				
 				app.afficherMenu();
 				choixUser=scan.nextInt();
 			}
