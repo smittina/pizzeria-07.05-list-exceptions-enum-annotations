@@ -50,7 +50,7 @@ public class PizzeriaAdminConsoleApp {
 				app.afficherMenu();
 				choixUser=scan.nextInt();
 			}
-			else {
+			else {				
 				factory.creerMenuService(daoPizza, scan, choixUser).executeUC();
 				app.afficherMenu();
 				choixUser=scan.nextInt();
