@@ -1,5 +1,6 @@
 package fr.pizzeria.console;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaMemDao;
@@ -25,6 +26,8 @@ public class PizzeriaAdminConsoleApp {
 		System.out.println("99. Sortir");
 	}
 	
+	
+	
 	/**
 	 * Permet de dire au Revoir
 	 */
@@ -38,48 +41,36 @@ public class PizzeriaAdminConsoleApp {
 		PizzaMemDao daoPizza = new PizzaMemDao();
 		Scanner scan = new Scanner(System.in);
 		int choixUser = -1;
-		boolean ok = false;
 		MenuServiceFactory factory = new MenuServiceFactory();
 		
-		//Premier affichage console
-		app.afficherMenu();
-		System.out.println();
-		while(!ok) {
-			try {
-				choixUser = scan.nextInt();
-				ok = true;
-			}
-			catch (Exception e) {
-				System.out.println("Attention, vous devez saisir un nombre uniquement");
-				scan.next();
-			}
-		}
 		
 		
 		// Boucle de choix utilisateurs
 		do {
-			ok = false;
-			if(choixUser<1 || choixUser>4 && choixUser !=99) {
-				System.out.println("Erreur de saisie");
-				app.afficherMenu();
-				choixUser=scan.nextInt();
-			}
-			else {
-				while(!ok) {
-					try {
-						factory.creerMenuService(daoPizza, scan, choixUser).executeUC();
-						ok = true;
-						System.out.println();
-					} catch (PizzaException e) {
-						System.out.println(e.getMessage());
-						System.out.println();
-					}
+			app.afficherMenu();
+			System.out.println();
+			try {
+				choixUser = scan.nextInt();
+				if(choixUser<1 || choixUser>4 && choixUser !=99) {
+					System.out.println("Erreur de saisie");
+					app.afficherMenu();
+					choixUser=scan.nextInt();
+					
 				}
-				
-				app.afficherMenu();
-				System.out.println();
-				choixUser=scan.nextInt();
+				else {
+					factory.creerMenuService(daoPizza, scan, choixUser).executeUC();
+					System.out.println();
+				}
 			}
+			catch(InputMismatchException e) {
+				System.out.println("Attention, vous devez saisir un nombre uniquement");
+				scan.next();
+			}
+			catch(PizzaException e ) {
+				System.out.println(e.getMessage());
+				System.out.println();
+			}	
+			
 		}while(choixUser != 99);
 		app.direAuRevoir();
 		
