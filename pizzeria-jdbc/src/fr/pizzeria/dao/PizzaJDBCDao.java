@@ -132,12 +132,19 @@ public class PizzaJDBCDao implements IPizzaDao {
 				}
 				lesPizzas.add(p);
 			}
-			results.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		fermerJDBC();
+		finally {
+			try {
+				results.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			fermerJDBC();
+		}
 		
 		return lesPizzas;
 	}
@@ -159,7 +166,16 @@ public class PizzaJDBCDao implements IPizzaDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		fermerJDBC();
+		finally {
+			try {
+				insertNewPizzaSt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			fermerJDBC();
+		}
+		
 
 	}
 
@@ -176,12 +192,20 @@ public class PizzaJDBCDao implements IPizzaDao {
 			updatePizzaSt.setString(5, pizza.getCategorie().toUpperCase());
 			updatePizzaSt.setString(6, codePizza);
 			updatePizzaSt.executeUpdate();
-			updatePizzaSt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		fermerJDBC();
+		finally {
+			try {
+				updatePizzaSt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			fermerJDBC();
+
+		}
 
 	}
 
@@ -193,13 +217,20 @@ public class PizzaJDBCDao implements IPizzaDao {
 			deletePizzaSt = connection.prepareStatement("DELETE FROM pizza WHERE code = ?");
 			deletePizzaSt.setString(1, codePizza);
 			deletePizzaSt.executeUpdate();
-			deletePizzaSt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		finally {
+			try {
+				deletePizzaSt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			fermerJDBC();
 
-		fermerJDBC();
+		}
 
 	}
 
@@ -208,6 +239,7 @@ public class PizzaJDBCDao implements IPizzaDao {
 		connecterJDBC();
 		PreparedStatement selectPizzaSt = null;
 		Pizza p = null;
+		ResultSet result = null;
 		int id = -1;
 		String code = "";
 		String libelle = "";
@@ -216,7 +248,7 @@ public class PizzaJDBCDao implements IPizzaDao {
 		try {
 			selectPizzaSt = connection.prepareStatement("SELECT * FROM pizza WHERE CODE = ?");
 			selectPizzaSt.setString(1, codePizza);
-			ResultSet result = selectPizzaSt.executeQuery();
+			result = selectPizzaSt.executeQuery();
 			while(result.next()) {
 				
 			
@@ -239,12 +271,20 @@ public class PizzaJDBCDao implements IPizzaDao {
 				System.out.println("Vous n'avez pas choisi une catégorie valide");
 			}
 		}
-		result.close();	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		fermerJDBC();
+		finally {
+			try {
+				result.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+			fermerJDBC();
+
+		}
 		return p;
 	}
 
