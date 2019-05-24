@@ -1,0 +1,13 @@
+11:18:48.721 [main] INFO  f.p.console.PizzeriaAdminConsoleApp - Création du DAO
+11:18:48.728 [main] INFO  f.p.console.PizzeriaAdminConsoleApp - Création du DAO
+11:18:52.493 [main] INFO  f.p.console.PizzeriaAdminConsoleApp - Création du MenuService en fonction du choix Utilisateur
+11:18:52.493 [main] INFO  f.p.console.PizzeriaAdminConsoleApp - Execution de la méthode : executeUC()
+11:18:52.495 [main] INFO  f.p.services.ListerPizzasService - Récupération de la liste des pizzas
+11:18:52.495 [main] INFO  f.p.services.ListerPizzasService - Affichage de la liste des pizzas
+11:18:52.526 [main] INFO  f.p.services.ListerPizzasService - Affichage de la liste des pizzas
+11:18:52.528 [main] INFO  f.p.services.ListerPizzasService - Affichage de la liste des pizzas
+11:18:52.529 [main] INFO  f.p.services.ListerPizzasService - Affichage de la liste des pizzas
+11:18:52.529 [main] INFO  f.p.services.ListerPizzasService - Affichage de la liste des pizzas
+11:18:52.529 [main] INFO  f.p.services.ListerPizzasService - Affichage de la liste des pizzas
+11:18:52.529 [main] INFO  f.p.services.ListerPizzasService - Affichage de la liste des pizzas
+11:18:52.529 [main] INFO  f.p.services.ListerPizzasService - Affichage de la liste des pizzas

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+
+	<!-- Redirection des logs vers la sortie standard -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+	<!-- Redirection vers un fichier -->
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>pizzaAdminConsole.log</file>
+		<append>true</append>
+		<immediateFlush>true</immediateFlush>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- Politique de log pour les classes du package : fr.pizzeria.console -->
+	<logger name="fr.pizzeria.console" level="INFO">
+		<appender-ref ref="STDOUT"></appender-ref>
+	</logger>
+	
+	<!-- Règle de log par défaut -->
+	<root level = "DEBUG">
+		<appender-ref ref="FILE"/>
+	</root>
+	
+</configuration>
